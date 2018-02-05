@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+
+<body>
+    <ul>
+        <li><a href="">1</a></li>
+        <li><a href="">2</a></li>
+        <li><a href="">3</a></li>
+        <li><a href="">4</a></li>
+        <li><a href="">5</a></li>
+        <li><a href="">6</a></li>
+        <li><a href="">7</a></li>
+        <li><a href="">8</a></li>
+        <li><a href="">9</a></li>
+    </ul>
+
+</body>
+<script>
+    let ul = document.querySelector('ul');
+    let lis = ul.querySelectorAll('li');
+    let w = lis[0].clientWidth;
+    let h = lis[0].clientHeight;
+
+    for (let i = 0; i < lis.length; i++) {
+        let li = lis[i];
+        li.addEventListener('mouseenter', (e) => {
+            let a = li.querySelector('a');
+            let x = e.clientX - li.offsetLeft;
+            let y = e.clientY - li.offsetTop;
+            if (x >= y && (w - x) > y) {
+                a.className = a.className = 'in-top'
+            }
+            if (x > y && (h - y) < x) {
+                a.className = a.className = 'in-right'
+            }
+            if (x < y && (h - x) < y) {
+                a.className = a.className = 'in-bottom'
+            }
+            if (x < y && (w - x) > y) {
+                a.className = a.className = 'in-left'
+            }
+        })
+        li.addEventListener('mouseleave', (e) => {
+            let a = li.querySelector('a');
+            let x = e.clientX - li.offsetLeft;
+            let y = e.clientY - li.offsetTop;
+            if (y < x && y < (w - x)) {
+                a.className = 'out-top'
+            }
+            if (x > y && (h - y) < x) {
+                a.className = 'out-right'
+            }
+            if (y > x && (w - x) < y) {
+                a.className = 'out-bottom'
+            }
+            if (x < y && x < (h - y)) {
+                a.className = 'out-left'
+            }
+
+        })
+    }
+</script>
+
+</html>
